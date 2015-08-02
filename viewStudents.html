@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JSON Practice</title>	
+	<script src="js/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script src="js/bootstrap.min.js"></script>	
+	<style>
+	@media only screen and (max-width:520px){
+		body{
+			overflow-x:scroll;
+		}
+	}
+	</style>
+</head>
+<body>
+<br>
+	<div class="container">
+		<button><a href="index.html">Back To Main</a></button>
+	</div>
+	<div class="container table-container">
+
+	</div>
+<script type="text/javascript">
+	setInterval(function(){
+	var xmlhttp = new XMLHttpRequest();
+	var url = "json.php";
+
+	xmlhttp.onreadystatechange = function(){
+		if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+			myFunction(xmlhttp.responseText);
+		}
+	}
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send();
+
+	function myFunction(response){
+		var arr = JSON.parse(response);
+		var i;
+		var out = "";
+		out += '<table class="table table-bordered table-responsive"><thead><tr><th>Student ID</th><th>FirstName</th><th>LastName</th><th>Course</th><th>Year Level</th></tr></thead><tbody>';
+		for(i=0; i<arr.length;i++){
+			out+= "<tr><td>" + arr[i].studId + "</td><td>" + arr[i].fname + "</td><td>" + arr[i].lname + "</td><td>" + arr[i].crse + "</td><td>" + arr[i].ylvl + "</td></tr>";
+		}
+		out+="</tbody></table>";
+		document.querySelector('.table-container').innerHTML = out;
+	}
+},500);
+</script>
+</body>
+</html>
