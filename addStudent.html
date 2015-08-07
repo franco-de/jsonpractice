@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JSON Practice</title>
+	<script src="js/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script src="js/bootstrap.min.js"></script>
+	<style type="text/css">
+	form label{
+		display:block;
+		margin-bottom: 10px;
+		margin-top: 10px;
+	}
+	.container{
+		background: #336699;
+		padding:10px;
+		border-radius: 10px;
+	}
+	.form-group label{
+		color:#fff;
+	}
+	input{
+		color:#000;
+	}
+	</style>
+</head>
+<body>
+<br>
+<div class="container" style="background:transparent">
+	<button><a href="index.html">Back To Main</a></button>
+</div>
+<div class="container">
+	<span id="result" style="color:#fff"></span>
+	<form role="form" class="form-vertical" method="POST" action="submit.php">
+		<div class="form-group">
+			<div class="col-sm-6">
+			<label>Student ID  <input type="text" id="studentId" required/></label>
+			</div>
+			<div class="col-sm-6">
+			<label>First Name  <input type="text" id="first" required/></label>
+			</div>
+			<div class="col-sm-6">
+			<label>Last Name  <input type="text" id="last" required/></label>
+			</div>
+			<div class="col-sm-6">
+			<label>Course  <input type="text" id="course" required/></label>
+			</div>
+			<div class="col-sm-6">
+			<label>Year Level  <input type="text" id="level" required/></label>
+			</div>
+			<div class="col-sm-6">
+			<input type="button" name="submit" value="Submit" id="btn">
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+
+$("#btn").on("click",function(e){
+	var id = $("#studentId").val();
+	var firstn = $("#first").val();
+	var lastn = $("#last").val();
+	var crs = $("#course").val();
+	var year = $("#level").val();
+	e.preventDefault();
+	$.post("http://devge.esy.es/WorkJSON/submit.php",
+		{studentId:id,first:firstn,last:lastn,course:crs,level:year},
+		function(data,status){
+			$('#result').html(data);
+	});
+
+});
+});
+</script>
+</body>
+</html>
