@@ -68,6 +68,7 @@ $("#btn").on("click",function(e){
 		{studentId:id,first:firstn,last:lastn,course:crs,level:year},
 		function(data,status){
 			$('#result').html(data);
+            window.location.replace("addstudent.html");
 	});
 
 });
